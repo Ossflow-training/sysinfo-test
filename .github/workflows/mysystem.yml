@@ -1,0 +1,60 @@
+name: mysystem
+
+on: push                           # étape 5 : sur main, conditions pas encore vues
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Dépendances
+        run: pip install ifaddr psutil pylint
+      - name: Lint
+        run: pylint --disable=missing-docstring script/mysystem/mysystem.py
+
+  run:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Dépendances
+        run: pip install ifaddr psutil
+      - name: Exécution
+        run: python script/mysystem/mysystem.py
+
+  unit:
+    needs: lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write                           # pour publier le rapport de tests
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Dépendances
+        run: pip install ifaddr psutil pytest
+      - name: Tests unitaires
+        id: tests
+        continue-on-error: true               # équivalent de allow_failure (GitLab CI)
+        run: pytest --junitxml=report.xml
+      - name: Signaler l'échec non bloquant
+        if: steps.tests.outcome == 'failure'
+        run: echo "::warning title=Tests unitaires::des tests échouent (non bloquant)"
+      - name: Rapport de tests
+        if: ${{ !cancelled() }}
+        uses: mikepenz/action-junit-report@v6
+        with:
+          report_paths: report.xml
+          detailed_summary: true     # tableau test par test dans le résumé du run
+          include_passed: true       # lister aussi les tests réussis
