@@ -42,7 +42,7 @@ jobs:
 
   unit:
     needs: lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu:24.04
     permissions:
       contents: read
       checks: write                           # pour publier le rapport de tests
