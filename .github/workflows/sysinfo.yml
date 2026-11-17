@@ -3,11 +3,19 @@ name: sysinfo
 on: push
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Vérification de syntaxe
+        run: make lint
+
   build:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - name: Compilation
         run: |
-          mkdir bin
+          mkdir -p bin
           make build
