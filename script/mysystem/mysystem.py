@@ -45,7 +45,7 @@ for adapter in ifaddr.get_adapters():
         for ip in adapter.ips:
             print(f'{ip.ip}/{ip.network_prefix}')
     else:
-        print("Pas d'adresse IP")
+        print("No IP address")
 
 # Mémoire
 print("\n*** Etat de la memoire vive")
