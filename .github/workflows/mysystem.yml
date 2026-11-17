@@ -18,8 +18,10 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.13'
+          cache: 'pip'                                          # active le cache pip
+          cache-dependency-path: script/mysystem/requirements.txt
       - name: Dépendances
-        run: pip install ifaddr psutil pylint
+        run: pip install -r script/mysystem/requirements.txt pylint
       - name: Lint
         run: pylint --disable=missing-docstring script/mysystem/mysystem.py
 
@@ -31,8 +33,10 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.13'
+          cache: 'pip'                                          # active le cache pip
+          cache-dependency-path: script/mysystem/requirements.txt
       - name: Dépendances
-        run: pip install ifaddr psutil
+        run: pip install -r script/mysystem/requirements.txt
       - name: Exécution
         run: python script/mysystem/mysystem.py
 
@@ -47,8 +51,10 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.13'
+          cache: 'pip'                                          # active le cache pip
+          cache-dependency-path: script/mysystem/requirements.txt
       - name: Dépendances
-        run: pip install ifaddr psutil pytest
+        run: pip install -r script/mysystem/requirements.txt pytest
       - name: Tests unitaires
         run: pytest --junitxml=report.xml
       - name: Rapport de tests
