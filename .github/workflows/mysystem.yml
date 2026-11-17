@@ -67,7 +67,7 @@ jobs:
       - name: Session de debug (si échec)
         if: ${{ failure() }}
         uses: owenthereal/action-upterm@6c2d60e09009f59cb4c45c88767c78701f14d121   # v2.8.1
-          timeout-minutes: 15
+        timeout-minutes: 15
         with:
           limit-access-to-actor: true     # seules vos clés SSH déclarées sur GitHub
           wait-timeout-minutes: 5         # fin de session si personne ne se connecte
