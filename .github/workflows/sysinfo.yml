@@ -9,4 +9,5 @@ jobs:
       - uses: actions/checkout@v7
       - name: Compilation
         run: |
+          mkdir bin
           make build
