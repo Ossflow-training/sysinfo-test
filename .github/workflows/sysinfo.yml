@@ -1,6 +1,14 @@
 name: sysinfo
 
-on: push
+on:
+  push:
+    branches: ['feature/**']       # branches de travail uniquement : jamais sur un tag
+    paths:
+      - 'src/sysinfo.c'
+      - '.github/workflows/sysinfo.yml'
+
+permissions:
+  contents: read
 
 jobs:
   lint:
