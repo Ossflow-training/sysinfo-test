@@ -66,7 +66,8 @@ jobs:
           include_passed: true       # lister aussi les tests réussis
       - name: Session de debug (si échec)
         if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@35b54afac29c97fb54faba5b513f8fbd1882f113   # v3.24
-        timeout-minutes: 15
-        with:
-          limit-access-to-actor: true         # seules les clés SSH de l'auteur du run
+        uses: owenthereal/action-upterm@6c2d60e09009f59cb4c45c88767c78701f14d121   # v2.8.1
+          timeout-minutes: 15
+          with:
+            limit-access-to-actor: true     # seules vos clés SSH déclarées sur GitHub
+            wait-timeout-minutes: 5         # fin de session si personne ne se connecte
