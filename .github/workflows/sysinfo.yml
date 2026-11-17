@@ -1,0 +1,12 @@
+name: sysinfo
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Compilation
+        run: |
+          make build
