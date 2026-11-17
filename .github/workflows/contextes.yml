@@ -1,7 +1,6 @@
 name: contextes
 
 on:
-  push:                    # à chaque push (étape 6 : retiré, lancement manuel seul)
   workflow_dispatch:       # permet aussi un lancement manuel
 
 env:                       # variables de niveau workflow : visibles dans tous les jobs
