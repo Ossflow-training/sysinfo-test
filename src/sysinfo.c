@@ -48,7 +48,7 @@ void get_ram_usage() {
 }
 
 int main() {
-    printf("Informations système :\n\n");
+    printf("System informmation :\n\n");
 
     get_ip();
     get_cpu_usage();
